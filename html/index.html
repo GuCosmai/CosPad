@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CosPad</title>
+    <link rel="stylesheet" href="../css/style.css">
+     <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Firebase SDK v9 Modular -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBkZCkZNubiZnvCFaDqG6FKBMm9kzLY5SA",
+            authDomain: "cospad-f8d91.firebaseapp.com",
+            projectId: "cospad-f8d91",
+            storageBucket: "cospad-f8d91.firebasestorage.app",
+            messagingSenderId: "772797701679",
+            appId: "1:7727701679:web:6002ceac8c51eb7c3230da",
+            measurementId: "G-GQVLQ8G62E"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // Expor auth e onAuthStateChanged globalmente para Index.js
+        window.firebaseAuth = auth;
+        window.onFirebaseAuthStateChanged = onAuthStateChanged;
+    </script>
+</head>
+<body>
+    <header>
+        <div class="text-center mb-8">
+            <h1 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Cospad</h1>
+            <p class="text-gray-400 mt-2">Seu estúdio de música na web.</p>
+            <!-- <div id="user-section">
+            <span id="welcome-message"></span>
+            <button id="logout-button">Sair</button>
+        </div> -->
+        </div>
+    </header>
+
+    <main>
+        <section id="controls">
+            <button id="add-pad-button">Adicionar Pad</button>
+            <button id="remove-mode-button">Modo Remoção</button>
+            <button id="color-mode-button">Mudar Cores</button>
+            <button id="change-layout-button">Mudar Layout</button>
+        </section>
+
+        
+        
+              <section id="pad-container">
+            <!-- Os pads de música serão adicionados aqui via JavaScript -->
+        </section>
+
+        <hr class="section-divider">
+
+        <section id="track-section">
+            <h2>Faixas de Áudio</h2>
+            <div id="track-controls">
+                <button id="add-track-button">Adicionar Faixa</button>
+            </div>
+            <div id="track-list">
+                <!-- As faixas de áudio serão adicionadas aqui -->
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2025 CosPad</p>
+    </footer>
+
+    <script src="../js/index.js"></script>
+</body>
+</html>
