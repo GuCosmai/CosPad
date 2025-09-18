@@ -311,7 +311,89 @@ footer {
     color: #888;
 }
 
+/* Layout Container */
+#layout-container {
+    display: flex;
+    gap: 20px;
+}
+
+.drop-zone {
+    flex: 1;
+    border: 2px dashed transparent;
+    padding: 10px;
+    transition: border-color 0.3s ease;
+    min-width: 200px; /* Minimum width for the containers */
+}
+
+.drop-zone.drag-over {
+    border-color: #1DB954;
+}
+
+.draggable {
+    cursor: move;
+    border: 1px solid #444;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.draggable.dragging {
+    opacity: 0.5;
+}
+
+#resizer {
+    width: 5px;
+    cursor: col-resize;
+    background-color: #333;
+}
+
+#resizer:hover {
+    background-color: #444;
+}
+
+/* Sound Library */
+#sound-library {
+    padding: 20px;
+    background-color: #181818;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+#sound-library.hidden {
+    display: none;
+}
+
+#library-sounds {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.library-sound {
+    padding: 10px 15px;
+    background-color: #282828;
+    border-radius: 5px;
+    cursor: move;
+    transition: background-color 0.3s ease;
+}
+
+.library-sound:hover {
+    background-color: #333;
+}
+
+
 /* Layout Classes */
+
+/* Responsive Layout */
+@media (max-width: 768px) {
+    #layout-container {
+        flex-direction: column;
+    }
+
+    #resizer {
+        display: none; /* Hide resizer on small screens */
+    }
+}
+
 body.layout-alt2 #track-section {
     order: -1; /* Move track section above pads */
 }

@@ -48,25 +48,33 @@
             <button id="remove-mode-button">Modo Remoção</button>
             <button id="color-mode-button">Mudar Cores</button>
             <button id="change-layout-button">Mudar Layout</button>
+            <button id="toggle-library-button">Biblioteca de Sons</button>
         </section>
 
-        
-        
-              <section id="pad-container">
-            <!-- Os pads de música serão adicionados aqui via JavaScript -->
-        </section>
+        <div id="sound-library" class="hidden">
+            <h3>Biblioteca de Sons</h3>
+            <div id="library-sounds"></div>
+        </div>
 
-        <hr class="section-divider">
-
-        <section id="track-section">
-            <h2>Faixas de Áudio</h2>
-            <div id="track-controls">
-                <button id="add-track-button">Adicionar Faixa</button>
+        <div id="layout-container">
+            <div class="drop-zone">
+                <section id="pad-container" class="draggable" draggable="true">
+                    <!-- Os pads de música serão adicionados aqui via JavaScript -->
+                </section>
             </div>
-            <div id="track-list">
-                <!-- As faixas de áudio serão adicionadas aqui -->
+            <div id="resizer"></div>
+            <div class="drop-zone">
+                <section id="track-section" class="draggable" draggable="true">
+                    <h2>Faixas de Áudio</h2>
+                    <div id="track-controls">
+                        <button id="add-track-button">Adicionar Faixa</button>
+                    </div>
+                    <div id="track-list">
+                        <!-- As faixas de áudio serão adicionadas aqui -->
+                    </div>
+                </section>
             </div>
-        </section>
+        </div>
 
     </main>
 
