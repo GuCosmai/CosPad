@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    <!-- Metadados básicos do documento -->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Garante a responsividade em dispositivos móveis -->
     <title>CosPad</title>
-    <link rel="stylesheet" href="css/style.css">
-     <!-- Tailwind CSS -->
+
+    <!-- Links para folhas de estilo -->
+    <link rel="stylesheet" href="css/style.css"> <!-- Sua folha de estilo personalizada -->
+    
+    <!-- Inclusão do Tailwind CSS via CDN para prototipagem rápida e estilização utilitária -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Firebase SDK v9 Modular -->
+
+    <!-- Configuração e inicialização do Firebase -->
     <script type="module">
+        // Importa as funções necessárias do SDK do Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
         import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js";
 
+        // Suas chaves de configuração do Firebase (é recomendado movê-las para variáveis de ambiente em produção)
         const firebaseConfig = {
             apiKey: "AIzaSyBkZCkZNubiZnvCFaDqG6FKBMm9kzLY5SA",
             authDomain: "cospad-f8d91.firebaseapp.com",
@@ -22,27 +29,36 @@
             measurementId: "G-GQVLQ8G62E"
         };
 
+        // Inicializa o app do Firebase
         const app = initializeApp(firebaseConfig);
+        // Obtém a instância de autenticação
         const auth = getAuth(app);
 
-        // Expor auth e onAuthStateChanged globalmente para Index.js
+        // Expõe as funções de autenticação para o escopo global (window)
+        // para que possam ser acessadas pelo seu arquivo index.js, que não é um módulo.
         window.firebaseAuth = auth;
         window.onFirebaseAuthStateChanged = onAuthStateChanged;
     </script>
 </head>
 <body>
+    <!-- Cabeçalho da aplicação -->
     <header>
         <div class="text-center mb-8">
+            <!-- Título estilizado com gradiente usando Tailwind CSS -->
             <h1 class="text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-pink-600">Cospad</h1>
             <p class="text-gray-400 mt-2">Seu estúdio de música na web.</p>
+            
+            <!-- Seção do usuário (comentada) - provavelmente para ser exibida após o login -->
             <!-- <div id="user-section">
-            <span id="welcome-message"></span>
-            <button id="logout-button">Sair</button>
-        </div> -->
+                <span id="welcome-message"></span>
+                <button id="logout-button">Sair</button>
+            </div> -->
         </div>
     </header>
 
+    <!-- Conteúdo principal da aplicação -->
     <main>
+        <!-- Seção com os botões de controle principais -->
         <section id="controls">
             <button id="add-pad-button">Adicionar Pad</button>
             <button id="remove-mode-button">Modo Remoção</button>
@@ -51,37 +67,52 @@
             <button id="toggle-library-button">Biblioteca de Sons</button>
         </section>
 
+        <!-- Biblioteca de sons, inicialmente oculta (classe .hidden) -->
         <div id="sound-library" class="hidden">
             <h3>Biblioteca de Sons</h3>
-            <div id="library-sounds"></div>
+            <div id="library-sounds">
+                <!-- Os sons da biblioteca serão inseridos aqui via JavaScript -->
+            </div>
         </div>
 
+        <!-- Container principal para o layout de arrastar e soltar -->
         <div id="layout-container">
+            <!-- Zona para soltar o container de pads -->
             <div class="drop-zone">
+                <!-- Seção dos pads, que é arrastável -->
                 <section id="pad-container" class="draggable" draggable="true">
-                    <!-- Os pads de música serão adicionados aqui via JavaScript -->
+                    <!-- Os pads de música serão adicionados aqui dinamicamente via JavaScript -->
                 </section>
             </div>
+
+            <!-- Divisor redimensionável entre as seções -->
             <div id="resizer"></div>
+
+            <!-- Zona para soltar a seção de faixas -->
             <div class="drop-zone">
+                <!-- Seção das faixas de áudio, que é arrastável -->
                 <section id="track-section" class="draggable" draggable="true">
                     <h2>Faixas de Áudio</h2>
+                    <!-- Controles específicos da seção de faixas -->
                     <div id="track-controls">
                         <button id="add-track-button">Adicionar Faixa</button>
                     </div>
+                    <!-- Lista onde as faixas serão inseridas -->
                     <div id="track-list">
-                        <!-- As faixas de áudio serão adicionadas aqui -->
+                        <!-- As faixas de áudio serão adicionadas aqui dinamicamente via JavaScript -->
                     </div>
                 </section>
             </div>
         </div>
-
     </main>
 
+    <!-- Rodapé da página -->
     <footer>
         <p>&copy; 2025 CosPad</p>
     </footer>
 
+    <!-- Link para o seu arquivo JavaScript principal -->
+    <!-- Colocado no final do body para garantir que o DOM esteja totalmente carregado antes da execução do script -->
     <script src="js/index.js"></script>
 </body>
 </html>

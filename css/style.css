@@ -1,38 +1,48 @@
-/* Reset básico e tema */
+/* ==========================================================================
+   1. RESET BÁSICO E CONFIGURAÇÕES GLOBAIS
+   ========================================================================== */
+
+/* Zera margens e paddings para um controle mais preciso */
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
+    box-sizing: border-box; /* Garante que padding e borda não afetem o tamanho final do elemento */
 }
 
+/* Estilos principais para o corpo da página */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #121212;
-    color: #e0e0e0;
+    background-color: #121212; /* Cor de fundo escura (tema dark) */
+    color: #e0e0e0; /* Cor de texto clara para contraste */
     display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    text-align: center;
+    flex-direction: column; /* Organiza o conteúdo em coluna (header, main, footer) */
+    min-height: 100vh; /* Garante que o corpo ocupe pelo menos 100% da altura da tela */
+    text-align: center; /* Centraliza o texto por padrão */
 }
+
+/* ==========================================================================
+   2. CABEÇALHO (HEADER)
+   ========================================================================== */
 
 header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: space-between; /* Alinha o título à esquerda e a seção do usuário à direita */
+    align-items: center; /* Centraliza verticalmente os itens */
     padding: 20px;
-    border-bottom: 1px solid #333;
+    border-bottom: 1px solid #333; /* Linha sutil para separar o cabeçalho do conteúdo */
     width: 100%;
 }
 
 h1 {
     color: #ffffff;
-    font-size: 2.5rem;
+    font-size: 2.5rem; /* Tamanho grande para o título principal */
 }
 
+/* Seção de boas-vindas e logout do usuário */
 #user-section {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 15px; /* Espaçamento entre a mensagem de boas-vindas e o botão */
 }
 
 #welcome-message {
@@ -40,32 +50,48 @@ h1 {
 }
 
 #logout-button {
-    background-color: #6c757d;
+    background-color: #6c757d; /* Cinza */
     color: white;
     border: none;
     padding: 8px 15px;
-    border-radius: 50px;
+    border-radius: 50px; /* Botão arredondado */
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 #logout-button:hover {
-    background-color: #5a6268;
+    background-color: #5a6268; /* Escurece ao passar o mouse */
 }
+
+/* ==========================================================================
+   3. CONTEÚDO PRINCIPAL (MAIN)
+   ========================================================================== */
 
 main {
-    flex-grow: 1;
+    flex-grow: 1; /* Permite que o conteúdo principal cresça e ocupe o espaço disponível */
     padding: 20px;
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto;
+    max-width: 900px; /* Largura máxima para manter a legibilidade */
+    margin: 0 auto; /* Centraliza o conteúdo principal na página */
 }
 
-/* Controles Gerais */
+/* Divisor visual para separar seções */
+.section-divider {
+    border: none;
+    height: 1px;
+    background-color: #333;
+    margin: 40px 0;
+}
+
+/* ==========================================================================
+   4. BOTÕES DE CONTROLE GERAL
+   ========================================================================== */
+
 #controls, #track-controls {
     margin-bottom: 20px;
 }
 
+/* Estilo base para os botões de controle */
 #add-pad-button, #remove-mode-button, #add-track-button, #color-mode-button {
     color: #ffffff;
     border: none;
@@ -77,8 +103,9 @@ main {
     margin: 5px;
 }
 
+/* Cores específicas para cada botão */
 #add-pad-button, #add-track-button {
-    background-color: #1DB954; /* Verde */
+    background-color: #1DB954; /* Verde Spotify */
 }
 
 #add-pad-button:hover, #add-track-button:hover {
@@ -94,7 +121,7 @@ main {
 }
 
 #remove-mode-button.active {
-    background-color: #ff4d4d; /* Vermelho quando ativo */
+    background-color: #ff4d4d; /* Vermelho quando o modo de remoção está ativo */
 }
 
 #color-mode-button {
@@ -106,22 +133,26 @@ main {
 }
 
 #color-mode-button.active {
-    background-color: #005cbf; /* Azul mais escuro quando ativo */
+    background-color: #005cbf; /* Azul mais escuro quando o modo de cor está ativo */
 }
 
+/* ==========================================================================
+   5. PADS DE SOM
+   ========================================================================== */
 
-/* Container dos Pads */
+/* Container que segura todos os pads */
 #pad-container {
     display: grid;
+    /* Cria colunas responsivas: preenche com o máximo de pads de 120px que couberem */
     grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
     gap: 15px;
     margin-bottom: 30px;
 }
 
-/* Estilo de cada Pad */
+/* Estilo individual de cada pad */
 .pad {
-    position: relative;
-    aspect-ratio: 1 / 1;
+    position: relative; /* Necessário para posicionar elementos filhos (botão de remover, seletor de cor) */
+    aspect-ratio: 1 / 1; /* Mantém o pad quadrado */
     background-color: #282828;
     border: 2px solid #404040;
     border-radius: 8px;
@@ -131,7 +162,7 @@ main {
     align-items: center;
     font-size: 14px;
     color: #b3b3b3;
-    transition: all 0.2s ease;
+    transition: all 0.2s ease; /* Animação suave para todas as propriedades */
 }
 
 .pad:hover {
@@ -139,47 +170,52 @@ main {
     border-color: #535353;
 }
 
+/* Efeito de "brilho" quando o pad está ativo (tocando) */
 .pad.active {
+    /* A cor do brilho é definida via JavaScript com a variável CSS --glow-color */
     box-shadow: 0 0 25px 5px var(--glow-color, #7c3aed);
-    transform: scale(1.05);
+    transform: scale(1.05); /* Leve aumento de tamanho */
     background-color: var(--glow-color, #7c3aed);
 }
 
+/* Estilo para indicar que um som pode ser "solto" sobre o pad */
 .pad.dragover {
     background-color: #404040;
     border-style: dashed;
     border-color: #1DB954;
 }
 
-/* Botão de remover pad */
+/* Botão para remover um pad (X) */
 .remove-pad-button {
     position: absolute;
     top: -5px;
     right: -5px;
     width: 20px;
     height: 20px;
-    background-color: #ff4d4d;
+    background-color: #ff4d4d; /* Vermelho */
     color: white;
     border: none;
     border-radius: 50%;
     cursor: pointer;
-    display: none; 
+    display: none; /* Escondido por padrão */
     justify-content: center;
     align-items: center;
     font-size: 12px;
     line-height: 20px;
     font-weight: bold;
-    z-index: 10;
+    z-index: 10; /* Garante que fique acima do pad */
 }
 
+/* Mostra o botão de remover ao passar o mouse sobre o pad ou quando o modo de remoção está ativo */
 .pad:hover .remove-pad-button, .remove-mode .remove-pad-button {
     display: flex;
 }
 
 .remove-pad-button:hover {
-    background-color: #ff1a1a;
+    background-color: #ff1a1a; /* Vermelho mais intenso */
 }
 
+/* Animação "tremor" nos pads quando o modo de remoção está ativo */
 .remove-mode .pad {
     border-color: #ff4d4d;
     animation: wiggle 0.2s infinite;
@@ -191,36 +227,43 @@ main {
     100% { transform: rotate(0.5deg); }
 }
 
-/* Seletor de Cor */
-.color-input {
+/* Seletor de cor para o brilho do pad */
+.color-input, .volume-slider {
     position: absolute;
-    bottom: 5px;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); /* Centraliza horizontalmente */
     width: 80%;
-    height: 20px;
+    height: 15px;
     cursor: pointer;
     display: none; /* Escondido por padrão */
     z-index: 10;
 }
 
-.color-mode .color-input {
+.color-input {
+    bottom: 25px; /* Posição acima do slider de volume */
+}
+
+.volume-slider {
+    bottom: 5px; /* Posição na base do pad */
+}
+
+/* Mostra os controles ao passar o mouse sobre o pad ou nos modos de edição */
+.pad:hover .color-input,
+.pad:hover .volume-slider,
+.color-mode .color-input,
+.remove-mode .volume-slider /* Exemplo: mostrar volume no modo remoção */
+{
     display: block;
 }
 
 .color-mode .pad {
-    border-color: #007bff;
+    border-color: #007bff; /* Muda a cor da borda para indicar o modo */
 }
 
-/* Divisor de Seção */
-.section-divider {
-    border: none;
-    height: 1px;
-    background-color: #333;
-    margin: 40px 0;
-}
+/* ==========================================================================
+   6. SEÇÃO DE FAIXAS DE ÁUDIO (TRACKS)
+   ========================================================================== */
 
-/* Seção de Faixas de Áudio */
 #track-section h2 {
     font-size: 1.8rem;
     margin-bottom: 20px;
@@ -232,6 +275,7 @@ main {
     gap: 15px;
 }
 
+/* Estilo para cada item de faixa */
 .track-item {
     background-color: #282828;
     border-radius: 8px;
@@ -249,12 +293,12 @@ main {
 }
 
 .track-name {
-    flex-grow: 1;
+    flex-grow: 1; /* Ocupa o espaço restante */
     text-align: left;
     font-size: 16px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    white-space: nowrap; /* Impede a quebra de linha */
+    overflow: hidden; /* Esconde o texto que transborda */
+    text-overflow: ellipsis; /* Adiciona "..." ao final do texto cortado */
 }
 
 .track-controls {
@@ -263,6 +307,7 @@ main {
     gap: 10px;
 }
 
+/* Estilo para os botões de controle da faixa (play, mute, etc.) */
 .track-controls button {
     background-color: #404040;
     border: 1px solid #505050;
@@ -273,7 +318,7 @@ main {
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.2s ease;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Impede que os botões encolham */
 }
 
 .track-controls button:hover {
@@ -281,79 +326,37 @@ main {
 }
 
 .track-controls button.active {
-    background-color: #1DB954;
+    background-color: #1DB954; /* Verde quando ativo (ex: play) */
 }
 
+/* Controle de volume */
 .track-controls input[type="range"] {
     width: 80px;
 }
 
+/* Barra de progresso da faixa */
 .progress-bar-container {
     width: 100%;
     height: 8px;
     background-color: #404040;
     border-radius: 4px;
-    overflow: hidden;
+    overflow: hidden; /* Garante que a barra de progresso fique contida */
 }
 
 .progress-bar {
     width: 0%;
     height: 100%;
     background-color: #1DB954;
-    transition: width 0.1s linear;
+    transition: width 0.1s linear; /* Animação suave do progresso */
 }
 
-/* Rodapé */
-footer {
-    padding: 15px;
-    border-top: 1px solid #333;
-    font-size: 14px;
-    color: #888;
-}
+/* ==========================================================================
+   7. BIBLIOTECA DE SONS (SOUND LIBRARY)
+   ========================================================================== */
 
-/* Layout Container */
-#layout-container {
-    display: flex;
-    gap: 20px;
-}
-
-.drop-zone {
-    flex: 1;
-    border: 2px dashed transparent;
-    padding: 10px;
-    transition: border-color 0.3s ease;
-    min-width: 200px; /* Minimum width for the containers */
-}
-
-.drop-zone.drag-over {
-    border-color: #1DB954;
-}
-
-.draggable {
-    cursor: move;
-    border: 1px solid #444;
-    border-radius: 8px;
-    height: 100%;
-}
-
-.draggable.dragging {
-    opacity: 0.5;
-}
-
-#resizer {
-    width: 5px;
-    cursor: col-resize;
-    background-color: #333;
-}
-
-#resizer:hover {
-    background-color: #444;
-}
-
-/* Sound Library */
 #sound-library {
     padding: 20px;
-    background-color: #181818;
+    background-color: #181818; /* Um pouco mais escuro que o resto */
     border-radius: 8px;
     margin-bottom: 20px;
 }
@@ -365,14 +368,15 @@ footer {
 #library-sounds {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Permite que os sons quebrem a linha */
 }
 
+/* Estilo para cada som na biblioteca (arrastável) */
 .library-sound {
     padding: 10px 15px;
     background-color: #282828;
     border-radius: 5px;
-    cursor: move;
+    cursor: move; /* Indica que o elemento é arrastável */
     transition: background-color 0.3s ease;
 }
 
@@ -380,31 +384,67 @@ footer {
     background-color: #333;
 }
 
+/* ==========================================================================
+   8. LAYOUT DRAG AND DROP E REDIMENSIONÁVEL
+   ========================================================================== */
 
-/* Layout Classes */
-
-/* Responsive Layout */
-@media (max-width: 768px) {
-    #layout-container {
-        flex-direction: column;
-    }
-
-    #resizer {
-        display: none; /* Hide resizer on small screens */
-    }
+#layout-container {
+    display: flex;
+    gap: 20px;
 }
 
-body.layout-alt2 #track-section {
-    order: -1; /* Move track section above pads */
+/* Zona onde os elementos podem ser soltos */
+.drop-zone {
+    flex: 1;
+    border: 2px dashed transparent;
+    padding: 10px;
+    transition: border-color 0.3s ease;
+    min-width: 200px;
+}
+
+.drop-zone.drag-over {
+    border-color: #1DB954; /* Borda verde ao arrastar sobre */
+}
+
+/* Elemento que pode ser arrastado */
+.draggable {
+    cursor: move;
+    border: 1px solid #444;
+    border-radius: 8px;
+    height: 100%;
+}
+
+.draggable.dragging {
+    opacity: 0.5; /* Torna o elemento semi-transparente ao ser arrastado */
+}
+
+/* Divisor redimensionável */
+#resizer {
+    width: 5px;
+    cursor: col-resize; /* Cursor para redimensionamento horizontal */
+    background-color: #333;
+}
+
+#resizer:hover {
+    background-color: #444;
+}
+
+/* ==========================================================================
+   9. LAYOUTS ALTERNATIVOS E RESPONSIVIDADE
+   ========================================================================== */
+
+/* Classes de corpo para layouts alternativos (controladas por JS) */
+body.layout-alt1 main {
+    max-width: 1200px; /* Layout mais largo */
 }
 
 body.layout-alt1 #pad-container {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Larger pads */
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Pads maiores */
     gap: 25px;
 }
 
-body.layout-alt1 main {
-    max-width: 1200px; /* Wider main section */
+body.layout-alt2 #track-section {
+    order: -1; /* Move a seção de faixas para cima dos pads */
 }
 
 body.layout-alt2 #pad-container {
@@ -420,6 +460,24 @@ body.layout-alt2 .pad {
     font-size: 12px;
 }
 
-body.layout-alt2 #track-section {
-    order: -1; /* Move track section above pads */
+/* Media Query para telas menores (tablets e celulares) */
+@media (max-width: 768px) {
+    #layout-container {
+        flex-direction: column; /* Empilha as seções verticalmente */
+    }
+
+    #resizer {
+        display: none; /* Esconde o redimensionador em telas pequenas */
+    }
+}
+
+/* ==========================================================================
+   10. RODAPÉ (FOOTER)
+   ========================================================================== */
+
+footer {
+    padding: 15px;
+    border-top: 1px solid #333;
+    font-size: 14px;
+    color: #888;
 }
